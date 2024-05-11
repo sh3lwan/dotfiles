@@ -1,0 +1,18 @@
+# aliases
+alias load_php8='load_php82'
+alias load_php7='load_php74'
+alias vi='sudo nvim'
+alias nginx='sudo nginx'
+alias npm='sudo npm'
+
+alias start_viavii='docker compose -f /var/www/viavii-api/docker/viavii-api-dev/docker-compose.yml up -d api-server saas-server web-server mariadb-server'
+alias stop_viavii='docker compose -f /var/www/viavii-api/docker/viavii-api-dev/docker-compose.yml down'
+
+alias start_school='docker compose -f /var/www/gschool/docker-compose.yml up -d'
+alias stop_school='docker compose -f /var/www/gschool/docker-compose.yml down'
+
+alias start_admin='docker compose -f /var/www/gadmin/docker-compose.yml up -d'
+alias stop_admin='docker compose -f /var/www/gadmin/docker-compose.yml down'
+
+alias start_redis='docker run -p 6379:6379 -d redis:alpine'
+#alias air='$(go env GOPATH)/bin/air'

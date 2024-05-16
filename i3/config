@@ -124,9 +124,9 @@ bindsym $mod+a focus parent
 
 # define names for workspaces with some nice symbols
 set $ws0 0✪
-set $ws1 1❶ 
+set $ws1 1❶ 
 set $ws2 2❷ 
-set $ws3 3❸ 
+set $ws3 3❸ 
 set $ws4 4❹ 
 set $ws5 5❺ 
 set $ws6 6❻ 
@@ -224,9 +224,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
 #####################################################################################################################
 #################                          light                                               #################
 #####################################################################################################################
+
 ##Executre Night Shift
 exec --no-startup-id redshift
 exec --no-startup-id light -s 50
@@ -242,33 +244,32 @@ exec --no-startup-id "setxkbmap -model pc105 -layout us,ar -option 'grp:alt_shif
 exec --no-startup-id xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 exec --no-startup-id xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 
-
 #Hide Top Bar 
 default_border pixel 0
 default_floating_border pixel 0
 
 
-# Screenshots
+############################################ Screenshots ##################################################
+###########################################################################################################
 # For screenshots install :
 # apt-get install maim xclip copyq
 # Screenshots
 # screenshot & open in gimp
 #bindsym Ctrl+Print exec teiler
-bindsym Ctrl+Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
-bindsym Shift+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f' --release
+#bindsym Ctrl+Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+#bindsym Shift+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f' --release
 
 #bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
 #bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
 #bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
-#
+
 ### Clipboard Screenshots
 #bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
 #bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 #bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
-
-
-############### Assign ##################
+########################################## Assign #########################################################
+###########################################################################################################
 # always open some programs on specified workspace
 assign [class="google-chrome"]  $ws1
 assign [class="gnome-terminal"] $ws2

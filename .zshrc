@@ -127,3 +127,5 @@ load_php82 () {
 
 # source aliases
 source ~/.zsh_aliases
+
+cd ~/workspace

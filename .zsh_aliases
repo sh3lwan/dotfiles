@@ -15,4 +15,9 @@ alias start_admin='docker compose -f /var/www/gadmin/docker-compose.yml up -d'
 alias stop_admin='docker compose -f /var/www/gadmin/docker-compose.yml down'
 
 alias start_redis='docker run -p 6379:6379 -d redis:alpine'
+
+alias ff='/home/$USER/dotfiles/tmux-session.sh'
+
+alias connect_shaban='nmcli device wifi connect Shaban password xyz@123456'
+alias connect_olwan='nmcli device wifi connect Olwan password Msafsae1@'
 #alias air='$(go env GOPATH)/bin/air'

@@ -86,16 +86,14 @@ bindsym $mod+Shift+Right move right
 # split in horizontal orientation
 #bindsym $mod+h split h
 
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+# split in vertical orientation
+bindsym $mod+v split v
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -265,7 +263,7 @@ exec_always feh --bg-scale --randomize ~/Pictures/Wallpapers/*
 #bindsym Ctrl+Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 #bindsym Shift+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f' --release
 
-#bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym Print exec --no-startup-id flameshot gui --path "/home/$USER/Pictures"
 #bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
 #bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
 

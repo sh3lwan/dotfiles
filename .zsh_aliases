@@ -1,23 +1,31 @@
+# define workspace directory
+WORKSPACE="/home/$USER/workspace"
+
 # aliases
 alias load_php8='load_php82'
 alias load_php7='load_php74'
 alias vi='sudo nvim'
 alias nginx='sudo nginx'
 alias npm='sudo npm'
-
-alias start_viavii='docker compose -f /var/www/viavii-api/docker/viavii-api-dev/docker-compose.yml up -d api-server saas-server web-server mariadb-server'
-alias stop_viavii='docker compose -f /var/www/viavii-api/docker/viavii-api-dev/docker-compose.yml down'
-
-alias start_school='docker compose -f /var/www/gschool/docker-compose.yml up -d'
-alias stop_school='docker compose -f /var/www/gschool/docker-compose.yml down'
-
-alias start_admin='docker compose -f /var/www/gadmin/docker-compose.yml up -d'
-alias stop_admin='docker compose -f /var/www/gadmin/docker-compose.yml down'
-
-alias start_redis='docker run -p 6379:6379 -d redis:alpine'
-
 alias ff='/home/$USER/dotfiles/tmux-session.sh'
+alias sail='./vendor/bin/sail'
 
-alias connect_shaban='nmcli device wifi connect Shaban password xyz@123456'
+
+### Docker ####
+alias start_viavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml up -d api-server saas-server web-server redis-server mariadb-server"
+alias stop_viavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml down"
+alias start_realt="docker compose -f $WORKSPACE/realt-api/docker-compose.yml up -d"
+alias stop_realt="docker compose -f $WORKSPACE/realt-api/docker-compose.yml down"
+alias start_redis="docker run -p 6379:6379 -d redis:alpine"
+alias start_verse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml up -d verse-api redis && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml up -d mysql"
+alias stop_verse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml down && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml down"
+alias stop_docker='docker stop $(docker ps -aq)'
+
+
+
+
+### WIFI ###
+alias connect_shaban='nmcli device wifi connect Shaban password Findme@1234'
 alias connect_olwan='nmcli device wifi connect Olwan password Msafsae1@'
+alias wifi='nmcli device wifi list'
 #alias air='$(go env GOPATH)/bin/air'

@@ -129,3 +129,6 @@ load_php82 () {
 source ~/.zsh_aliases
 
 cd ~/workspace
+
+# Set up fzf key bindings and fuzzy completion
+#source <(fzf --zsh)

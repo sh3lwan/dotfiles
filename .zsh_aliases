@@ -12,14 +12,17 @@ alias sail='./vendor/bin/sail'
 
 
 ### Docker ####
-alias start_viavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml up -d api-server saas-server web-server redis-server mariadb-server"
-alias stop_viavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml down"
-alias start_realt="docker compose -f $WORKSPACE/realt-api/docker-compose.yml up -d"
-alias stop_realt="docker compose -f $WORKSPACE/realt-api/docker-compose.yml down"
-alias start_redis="docker run -p 6379:6379 -d redis:alpine"
-alias start_verse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml up -d verse-api redis && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml up -d mysql"
-alias stop_verse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml down && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml down"
-alias stop_docker='docker stop $(docker ps -aq)'
+alias startviavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml up -d api-server saas-server web-server redis-server mariadb-server"
+alias stopviavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml down"
+alias startrealt="docker compose -f $WORKSPACE/realt-api/docker-compose.yml up -d"
+alias stoprealt="docker compose -f $WORKSPACE/realt-api/docker-compose.yml down"
+alias startredis="docker run -p 6379:6379 -d redis:alpine"
+alias startverse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml up -d verse-api redis && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml up -d mysql"
+alias stopverse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml down && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml down"
+alias stopdocker='docker stop $(docker ps -aq)'
+alias startcare="docker compose -f $WORKSPACE/digitaldoctor/docker-compose.yml up -d laravel.test mysql redis"
+alias stopcare="docker compose -f $WORKSPACE/digitaldoctor/docker-compose.yml down"
+
 
 
 

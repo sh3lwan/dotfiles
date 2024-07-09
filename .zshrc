@@ -130,5 +130,8 @@ source ~/.zsh_aliases
 
 cd ~/workspace
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Set up fzf key bindings and fuzzy completion
-#source <(fzf --zsh)
+source <(fzf --zsh)
+

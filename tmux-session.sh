@@ -11,7 +11,7 @@ if [ -n "$selected_dir" ]; then
     echo "$session_name"
 
     # Create a new tmux session with the selected directory
-    tmux new-session -s "$session_name" -c "$selected_dir"
+    #tmux new-session -s "$session_name" -c "$selected_dir"
 else
     echo "No directory selected."
 fi

@@ -81,6 +81,8 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+##source $HOME/find-project.sh
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -125,13 +127,17 @@ load_php82 () {
     sudo update-alternatives --set php /usr/bin/php8.2
 }
 
-# source aliases
-source ~/.zsh_aliases
 
 cd ~/workspace
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Set up fzf key bindings and fuzzy completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
+source <(kubectl completion zsh)
+
+
+# source aliases
+source ~/.zsh_aliases
+
+bindkey -v
 

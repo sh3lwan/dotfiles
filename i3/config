@@ -263,7 +263,7 @@ exec_always feh --bg-scale --randomize ~/Pictures/Wallpapers/*
 #bindsym Ctrl+Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 #bindsym Shift+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f' --release
 
-bindsym Print exec --no-startup-id flameshot gui --path "/home/$USER/Pictures"
+bindsym Print exec --no-startup-id flameshot gui
 #bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
 #bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
 

@@ -8,7 +8,10 @@ alias vi='sudo nvim'
 alias nginx='sudo nginx'
 alias npm='sudo npm'
 alias ff='/home/$USER/dotfiles/tmux-session.sh'
+#alias to='/home/$USER/dotfiles/find-project.sh'
 alias sail='./vendor/bin/sail'
+alias dp='docker ps'
+alias dk='docker stop $(docker ps -aq)'
 
 
 ### Docker ####
@@ -20,7 +23,7 @@ alias startredis="docker run -p 6379:6379 -d redis:alpine"
 alias startverse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml up -d verse-api redis && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml up -d mysql"
 alias stopverse="docker compose -f $WORKSPACE/verse-api/docker-compose.yml down && docker compose -f $WORKSPACE/core-database-migration/docker-compose.yml down"
 alias stopdocker='docker stop $(docker ps -aq)'
-alias startcare="docker compose -f $WORKSPACE/digitaldoctor/docker-compose.yml up -d laravel.test mysql redis"
+alias startcare="docker compose -f $WORKSPACE/digitaldoctor/docker-compose.yml up -d laravel.test mysql redis minio"
 alias stopcare="docker compose -f $WORKSPACE/digitaldoctor/docker-compose.yml down"
 
 
@@ -32,3 +35,16 @@ alias connect_shaban='nmcli device wifi connect Shaban password Findme@1234'
 alias connect_olwan='nmcli device wifi connect Olwan password Msafsae1@'
 alias wifi='nmcli device wifi list'
 #alias air='$(go env GOPATH)/bin/air'
+# Define the fzf_cd function
+fzf_cd() {
+    local dir
+    dir=$(find ${WORKSPACE} -mindepth 1 -maxdepth 1 -type d | fzf --prompt "--GOTO Project: ") && cd "$dir"
+}
+
+fzf_nvim() {
+    local dir
+    dir=$(find ${WORKSPACE} -mindepth 1 -maxdepth 1 -type d | fzf --prompt "--NVIM Project: ") && cd "$dir" && nvim
+}
+
+alias fcd=fzf_cd
+alias fdd=fzf_nvim

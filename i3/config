@@ -124,8 +124,8 @@ bindsym $mod+a focus parent
 set $ws0 0✪
 set $ws1 1❶ 
 set $ws2 2❷ 
-set $ws3 3❸ 
-set $ws4 4❹ 
+set $ws3 3❸ 
+set $ws4 4❹ 
 set $ws5 5❺ 
 set $ws6 6❻ 
 set $ws7 7❼ ☘
@@ -238,7 +238,12 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 # Keyboard Layouts
 # Set initial keyboard layout
-exec --no-startup-id "setxkbmap -model pc105 -layout us,ar -option 'grp:alt_shift_toggle'"
+#exec --no-startup-id "setxkbmap -model pc105 -layout us,ar"
+#exec "setxkbmap -option 'grp:alt_shift_toggle'"
+
+exec_always "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:alt_shift_toggle"
+
+
 
 # TouchPad Gestures
 exec --no-startup-id xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
@@ -275,5 +280,15 @@ bindsym Print exec --no-startup-id flameshot gui
 ########################################## Assign #########################################################
 ###########################################################################################################
 # always open some programs on specified workspace
-#assign [class="google-chrome"]  $ws1
-#assign [class="gnome-terminal"] $ws2
+# Assign applications to workspaces
+#assign [class="Chrome"] $ws1
+#assign [class="Terminal"] $ws2
+#assign [class="Slack"] $ws3
+#assign [class="Spotify"] $ws4
+#assign [class="BeeKeeper"] $ws5
+#
+## Automatically start applications on specific workspaces
+#exec --no-startup-id i3-msg "workspace $ws1; exec chrome"
+#exec --no-startup-id i3-msg "workspace $ws2; exec terminal"
+#exec --no-startup-id i3-msg "workspace $ws3; exec slack"
+#exec --no-startup-id i3-msg "workspace $ws4; exec spotify"

@@ -38,6 +38,11 @@ alias wifi='nmcli device wifi list'
 # Define the fzf_cd function
 fzf_cd() {
     local dir
+    dir=$(find -mindepth 1 -maxdepth 1 -type d | fzf --prompt "--GOTO Project: ") && cd "$dir"
+}
+
+fzf_project() {
+    local dir
     dir=$(find ${WORKSPACE} -mindepth 1 -maxdepth 1 -type d | fzf --prompt "--GOTO Project: ") && cd "$dir"
 }
 
@@ -46,5 +51,13 @@ fzf_nvim() {
     dir=$(find ${WORKSPACE} -mindepth 1 -maxdepth 1 -type d | fzf --prompt "--NVIM Project: ") && cd "$dir" && nvim
 }
 
-alias fcd=fzf_cd
+#gch() {
+#    local branch
+#    branch=$(git branch --all | fzf | tr -d '[:blank:]') && git checkout "$branch"
+#}
+
+alias fcd=fzf_project
 alias fdd=fzf_nvim
+#alias gch=gch
+alias gp="git pull"
+alias gs="git status"

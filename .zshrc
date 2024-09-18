@@ -115,6 +115,8 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export NVM_DIR="$HOME/.nvm"
+export PATH="$PATH:$HOME/flutter/bin"
+
 
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -128,7 +130,8 @@ load_php82 () {
 }
 
 
-cd ~/workspace
+# always open workspace
+#cd ~/workspace
 
 # Set up fzf key bindings and fuzzy completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

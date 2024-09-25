@@ -1,0 +1,86 @@
+- hosts: localhost
+  become: false
+  gather_facts: false
+  vars_prompt:
+    - name: "vault_password"
+      prompt: "Enter the ansible vault password:"
+      private: yes
+
+  tasks:
+    # Symlink dotfiles (assuming you have dotfiles on a repository)
+    - name: Clone dotfiles repo
+      git:
+        repo: 'git@github.com:sh3lwan/dotfiles.git'
+        dest: ~/dotfiles
+
+    - name: Copy .ssh/id_rsa.pub
+      shell: mkdir -p ~/.ssh && cp ~/dotfiles/.ssh/ida_rsa.pub ~/.ssh/ida_rsa
+
+    - name: Decrypt SSH private key
+      ansible.builtin.command:
+        cmd: "ansible-vault decrypt ~/dotfiles/.ssh/id_rsa --output ~/.ssh/id_rsa --vault-password-file /dev/stdin"
+        stdin: "{{ vault_password }}"
+      no_log: true  # Hide the password and sensitive command output
+
+    - name: Set correct permissions for SSH private key
+      ansible.builtin.file:
+        path: ~/.ssh/id_rsa
+        mode: '0600'
+
+
+    # Install Homebrew if not installed
+    - name: Check if Homebrew is installed
+      stat: path=/opt/homebrew
+      register: brew_installed
+
+    - name: Install Homebrew
+      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when: brew_installed.stat.exists == False
+
+    # Install essential packages via Homebrew
+    - name: Install essential packages
+      homebrew:
+        name: 
+          - zsh
+          - tmux
+          - neovim
+          - docker
+          - fd
+          - fzf
+          - ripgrep
+          - node
+          - golang
+        state: present
+
+    # - name: Install GUI applications
+    #   homebrew_cask:
+    #     name:
+    #       - iterm2
+    #       - phpstorm
+    #     state: present
+
+    # Set Zsh as the default shell
+    - name: Set zsh as default shell
+      shell: chsh -s $(which zsh)
+
+    ######### Dotfiles #########
+    - name: Symlink dotfiles
+      shell: ln -s ~/dotfiles/.zshrc ~/.zshrc && source ~/.zsrhc
+
+    # Install fzf completion and key bindings
+    - name: Install fzf completion and key bindings
+      shell: $(brew --prefix)/opt/fzf/install --all
+
+    ######## Neovim #########
+    # Symlink Neovim (assuming you have neovim setup on a repository)
+    - name: Clone dotfiles repo
+      git:
+        repo: 'git@github.com:sh3lwan/vim-setup.git'
+        dest: ~/.config/nvim
+
+    # Install Packer for Neovim
+    - name: Install Packer for Neovim
+      shell: git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+              ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+

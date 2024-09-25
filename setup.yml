@@ -7,37 +7,31 @@
       private: yes
 
   tasks:
-    # Symlink dotfiles (assuming you have dotfiles on a repository)
-    - name: Clone dotfiles repo
-      git:
-        repo: 'git@github.com:sh3lwan/dotfiles.git'
-        dest: ~/dotfiles
-
+    # Copy .SSH
     - name: Copy .ssh/id_rsa.pub
-      shell: mkdir -p ~/.ssh && cp ~/dotfiles/.ssh/ida_rsa.pub ~/.ssh/ida_rsa
+      shell: mkdir -p ~/.ssh && cp ~/dotfiles/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 
     - name: Decrypt SSH private key
       ansible.builtin.command:
         cmd: "ansible-vault decrypt ~/dotfiles/.ssh/id_rsa --output ~/.ssh/id_rsa --vault-password-file /dev/stdin"
         stdin: "{{ vault_password }}"
-      no_log: true  # Hide the password and sensitive command output
+      no_log: false  # Hide the password and sensitive command output
 
     - name: Set correct permissions for SSH private key
       ansible.builtin.file:
         path: ~/.ssh/id_rsa
         mode: '0600'
 
-
     # Install Homebrew if not installed
     - name: Check if Homebrew is installed
       stat: path=/opt/homebrew
       register: brew_installed
 
-    - name: Install Homebrew
+    - name: Installing Homebrew
       shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       when: brew_installed.stat.exists == False
 
-    # Install essential packages via Homebrew
+    Install essential packages via Homebrew
     - name: Install essential packages
       homebrew:
         name: 
@@ -52,34 +46,46 @@
           - golang
         state: present
 
-    # - name: Install GUI applications
-    #   homebrew_cask:
-    #     name:
-    #       - iterm2
-    #       - phpstorm
-    #     state: present
+    - name: Install GUI applications
+      homebrew_cask:
+        name:
+          - iterm2
+          - phpstorm
+        state: present
 
     # Set Zsh as the default shell
     - name: Set zsh as default shell
-      shell: chsh -s $(which zsh)
+      shell: sudo chsh -s $(which zsh)
 
     ######### Dotfiles #########
     - name: Symlink dotfiles
-      shell: ln -s ~/dotfiles/.zshrc ~/.zshrc && source ~/.zsrhc
+      shell: ln -fs ~/dotfiles/.zshrc ~/.zshrc && ln -fs ~/dotfiles/.zsh_aliases ~/.zsh_aliases && source ~/.zshrc
+
+    - name: Symlink Tmux Config
+      shell: ln -ns ~/dotfiles/.tmux-conf ~/.tmux-conf
+
+    - name: Symlink P10K Settings
+      shell: ln -ns ~/dotfiles/.p10k.zsh ~/.p10k.zsh
 
     # Install fzf completion and key bindings
     - name: Install fzf completion and key bindings
       shell: $(brew --prefix)/opt/fzf/install --all
 
     ######## Neovim #########
-    # Symlink Neovim (assuming you have neovim setup on a repository)
-    - name: Clone dotfiles repo
+    # Install Neovim if not installed
+    - name: Check Neovim Installed
+      stat: path=~/.config/nvim
+      register: nvim_install
+
+    - name: Clone Neovim
+      when: nvim_install.stat.exists == False
       git:
         repo: 'git@github.com:sh3lwan/vim-setup.git'
         dest: ~/.config/nvim
 
     # Install Packer for Neovim
     - name: Install Packer for Neovim
+      when: nvim_install.stat.exists == False
       shell: git clone --depth 1 https://github.com/wbthomason/packer.nvim \
               ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 

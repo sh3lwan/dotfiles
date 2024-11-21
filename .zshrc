@@ -121,6 +121,9 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+export STARSHIP_CONFIG=~/.config/starship.toml
+
+
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -142,8 +145,6 @@ source <(fzf --zsh)
 source <(kubectl completion zsh)
 
 
-# source aliases
-source ~/.zsh_aliases
 
 bindkey -v
 
@@ -154,3 +155,22 @@ export PATH="$PATH:$HOME/.rvm/bin"
 #eval "$(rbenv init -)"
 #export PATH="$HOME/.jenv/bin:$PATH"
 #eval "$(jenv init -)"
+eval "$(starship init zsh)"
+
+
+# source aliases
+source ~/.zsh_aliases
+source ~/chatgpt.env
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/sh3lwan/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP binary.
+export PATH="/Users/sh3lwan/Library/Application Support/Herd/bin/":$PATH
+
+
+
+# Herd injected PHP 8.1 configuration.
+export HERD_PHP_81_INI_SCAN_DIR="/Users/sh3lwan/Library/Application Support/Herd/config/php/81/"

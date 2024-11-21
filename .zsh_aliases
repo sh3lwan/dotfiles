@@ -12,7 +12,7 @@ alias to="/home/$USER/dotfiles/find-project.sh"
 
 
 ### Docker ####
-alias startviavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml up -d api-server saas-server web-server redis-server mariadb-server"
+alias startviavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml up --build api-server saas-server mariadb-server redis-server --build -d"
 alias stopviavii="docker compose -f $WORKSPACE/viavii-api/docker/viavii-api-dev/docker-compose.yml down"
 alias stopdocker='docker stop $(docker ps -aq)'
 alias dp='docker ps'

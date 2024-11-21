@@ -38,10 +38,10 @@
           - zsh
           - tmux
           - neovim
-          - docker
           - fd
           - fzf
           - ripgrep
+          - bat
           - node
           - golang
         state: present
@@ -49,7 +49,9 @@
     - name: Install GUI applications
       homebrew_cask:
         name:
-          - iterm2
+          - warp
+          - docker
+          - starship
           - phpstorm
         state: present
 
